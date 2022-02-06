@@ -176,6 +176,7 @@ class TNTIndexer
         }
 
         $this->index = new PDO('sqlite:'.$this->config['storage'].$indexName);
+        $this->index->setAttribute(PDO::ATTR_TIMEOUT, 5);
         $this->index->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if ($this->config['wal']) {
