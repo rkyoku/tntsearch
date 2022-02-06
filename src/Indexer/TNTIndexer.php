@@ -177,7 +177,7 @@ class TNTIndexer
 
         $dsn = 'sqlite:'.$this->config['storage'].$indexName;
         if ($this->config['wal']) {
-            $dsn .= '?' . 'cache=shared&mode=rwc&_journal_mode=WAL');
+            $dsn .= '?' . 'cache=shared&mode=rwc&_journal_mode=WAL';
         }
         $this->index = new PDO($dsn);
         $this->index->setAttribute(PDO::ATTR_TIMEOUT, !isset($this->config['timeout']) ? 3 : (int)$this->config['timeout']);
