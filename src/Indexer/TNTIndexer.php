@@ -175,17 +175,16 @@ class TNTIndexer
             unlink($this->config['storage'].$indexName);
         }
 
-        $dsn = 'sqlite:'.$this->config['storage'].$indexName;
-        if ($this->config['wal']) {
-            $dsn .= '?' . 'cache=shared&mode=rwc&_journal_mode=WAL';
-        }
-        $this->index = new PDO($dsn);
+        $this->index = new PDO('sqlite:'.$this->config['storage'].$indexName);
         $this->index->setAttribute(PDO::ATTR_TIMEOUT, !isset($this->config['timeout']) ? 3 : (int)$this->config['timeout']);
         $this->index->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//         if ($this->config['wal']) {
-//             $this->index->exec("PRAGMA journal_mode=wal;");
-//         }
+        // Beware as $this->config['storage'] MUST be local for this to work.
+        // Otherwise you might get "General error: 5 database is locked" all the time.
+        // Switching $this->config['storage'] from a mounted drive (with proper permissions) to /tmp fixed it.
+        if ($this->config['wal']) {
+            $this->index->exec("PRAGMA journal_mode=wal;");
+        }
 
         $this->index->exec("CREATE TABLE IF NOT EXISTS wordlist (
                     id INTEGER PRIMARY KEY,
