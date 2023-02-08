@@ -445,6 +445,8 @@ class TNTIndexer
 
     public function updateInfoTable($key, $value)
     {
+        if (!$this-index)
+            return;
         $this->updateInfoTableStmt = $this->index->prepare("UPDATE info SET value = :value WHERE key = :key");
         $this->updateInfoTableStmt->bindValue(':key', $key);
         $this->updateInfoTableStmt->bindValue(':value', $value);
