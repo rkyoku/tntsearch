@@ -41,6 +41,7 @@ class TNTIndexer
     protected mixed $insertWordlistStmt = null;
     protected mixed $updateInfoTableStmt = null;
     protected mixed $selectWordlistStmt = null;
+    protected mixed $updateWordlistStmt = null;
 
     
     public function __construct()
