@@ -39,6 +39,7 @@ class TNTIndexer
     public $indexName             = "";
     public $statementsPrepared    = false;
     protected mixed $insertWordlistStmt = null;
+    protected mixed $updateInfoTableStmt = null;
 
     
     public function __construct()
