@@ -38,7 +38,9 @@ class TNTIndexer
     public $steps                 = 1000;
     public $indexName             = "";
     public $statementsPrepared    = false;
+    protected mixed $insertWordlistStmt = null;
 
+    
     public function __construct()
     {
         $this->stemmer    = new NoStemmer;
