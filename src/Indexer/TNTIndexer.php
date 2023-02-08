@@ -126,8 +126,8 @@ class TNTIndexer
 
     public function setStemmer($stemmer)
     {
-        $this->stemmer = $stemmer;
-        $this->updateInfoTable('stemmer', get_class($stemmer));
+        $this->stemmer = $stemmer ?: new NoStemmer;
+        $this->updateInfoTable('stemmer', get_class($this->stemmer));
     }
 
     public function setCroatianStemmer()
